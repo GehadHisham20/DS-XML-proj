@@ -102,37 +102,4 @@ Node* getLastChild(Node* root){
 
 }
 
-//////////////////////////shaymaa
-std::vector <std::string> pureTags;
-std::vector <std::string> pureTagsLinesWithoutSlash;
-std::vector <std::string> tags;
-std::vector <std::string> tagsAndLines;
 
-void makePureTags(){
-    pureTags.resize(0);
-  for(unsigned long long x=0;x<tags.size();x++){
-    if(!tags[x].empty()){
-        if(tags[x].find(' ') != std::string::npos){
-            std::string s = tags[x].substr(0,tags[x].find(' '));
-            pureTags.push_back(s);
-        }else{
-            pureTags.push_back(tags[x]);
-        }
-    }
-  }
-}
-void makePureTagsLinesWithoutSlash(){
-        pureTagsLinesWithoutSlash.resize(0);
-        for(unsigned int x=0;x<tagsAndLines.size();x++){        //make tags without slash,,stored in pureTagsLinesWithoutSlash vector
-            if(tagsAndLines[x][0] == '/'){
-                pureTagsLinesWithoutSlash.push_back(tagsAndLines[x].substr(1,tagsAndLines[x].length()-1));
-            }else{
-                if(tagsAndLines[x][0] != '~'){
-                    //int spacePlace = tagsAndLines[x].find(' ');
-                    pureTagsLinesWithoutSlash.push_back(tagsAndLines[x]);
-                }else{
-                    pureTagsLinesWithoutSlash.push_back(tagsAndLines[x]);
-                }
-            }
-    }
-}
