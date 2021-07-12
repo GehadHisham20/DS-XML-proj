@@ -58,6 +58,31 @@ void getTags_Lines(){
     }
   }
 }
+
+struct Node{
+    std::string data;
+    Node* parent;
+    std::vector<Node *> child;
+    std::string insideData;
+};
+
+Node* newNode(std::string data){
+    std::string mainTag,internalData;
+        if(data.find('=') == -1){
+            Node* nNode = new Node;
+            nNode->data = data;
+            return nNode;
+        }else{
+            int i = data.find(' ');
+            mainTag = data.substr(0,i);
+            internalData = data.substr(i+1,data.length()-1);
+            Node* newNode = new Node;
+            newNode->data = mainTag;
+            newNode->insideData = internalData;
+            return newNode;
+        }
+}
+
 //////////////////////////shaymaa
 std::vector <std::string> pureTags;
 std::vector <std::string> pureTagsLinesWithoutSlash;
