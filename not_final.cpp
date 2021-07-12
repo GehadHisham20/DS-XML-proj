@@ -23,37 +23,38 @@ void loadFile(){
 ///////////////////////////Gehad
 std::vector <std::string> lines;
 std::vector <std::string> tags;
-std::vector <std::string> tagsAndLines;
-void getTagsAndLines(){
-    std::vector<std::string> TandL;
+std::vector <std::string> tags_lines;
+
+void getTags_Lines(){
+    std::vector<std::string> t_l;
     tags.resize(0);
-    tagsAndLines.resize(0);
-    for(unsigned long long x=0;x<lines.size();x++){
+    tags_lines.resize(0);
+    for(unsigned long long i=0;i<lines.size();i++){
 
-    int tagCounter = std::count(lines[x].begin(), lines[x].end(), '<');
-    int place1 = lines[x].find('<');
-    int place2 = lines[x].find('>');
+    int tagCounter = std::count(lines[i].begin(), lines[i].end(), '<');
+    int p1 = lines[i].find('<');
+    int p2 = lines[i].find('>');
 
-    for(int m=0;m<tagCounter;m++){
+    for(int j=0;j<tagCounter;j++){
 
-        tags.push_back(lines[x].substr(place1+1,place2-place1-1));
-        TandL.push_back(lines[x].substr(place1+1,place2-place1-1));
+        tags.push_back(lines[i].substr(p1+1,p2-p1-1));
+        t_l.push_back(lines[i].substr(p1+1,p2-p1-1));
 
-        if(lines[x][place2+1] != '<'){
-            int temp = lines[x].find('<',place1+1);
+        if(lines[i][p2+1] != '<'){
+            int temp = lines[i].find('<',p1+1);
 
-            TandL.push_back("~"+lines[x].substr(place2+1,temp-place2-1));
+            t_l.push_back("~"+lines[i].substr(2+1,temp-p2-1));
         }
 
-        int place3 = lines[x].find('<',place1+1);
-        int place4 = lines[x].find('>',place2+1);
-        place1 = place3;
-        place2 = place4;
+        int p3 = lines[i].find('<',p1+1);
+        int p4 = lines[i].find('>',p2+1);
+        p1 = p3;
+        p2 = p4;
     }
   }
-  for(unsigned long long x=0;x<TandL.size();x++){      //to remove empty lines and store tags and lines in tagsAndLines Vector
-    if(! ((TandL[x][0] == '~') && (TandL[x].length() == 1)) ){
-        tagsAndLines.push_back(TandL[x]);
+  for(unsigned long long i=0;i<t_l.size();i++){      //to remove empty lines and store tags and lines in tagsAndLines Vector
+    if(! ((t_l[i][0] == '~') && (t_l[i].length() == 1)) ){
+        tags_lines.push_back(t_l[i]);
     }
   }
 }
