@@ -82,6 +82,17 @@ Node* newNode(std::string data){
             return newNode;
         }
 }
+Node* addChild(Node* root,std::string data){
+    Node* ch = newNode(data);
+    root->child.push_back(ch);
+    ch->parent=root;
+    return ch;
+}
+
+void addChild(Node* root,Node* c){
+    root->child.push_back(c);
+    return;
+}
 
 //////////////////////////shaymaa
 std::vector <std::string> pureTags;
