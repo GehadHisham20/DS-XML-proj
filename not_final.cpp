@@ -101,5 +101,37 @@ Node* getLastChild(Node* root){
     else return getLastChild(root->child[root->child.size()-1]);
 
 }
+///////////////////shaymaa
+std::vector <std::string> tags;
+std::vector <std::string> tags_lines;
+std::vector <std::string> pTags;  
+std::vector <std::string> pTagsWithoutSlash; 
 
+void makePTags(){
+    pTags.resize(0);
+  for(unsigned long long i=0;i<tags.size();i++){
+    if(!tags[i].empty()){
+        if(tags[i].find(' ') != std::string::npos){
+            std::string str = tags[i].substr(0,tags[i].find(' '));
+            pTags.push_back(str);
+        }else{
+            pTags.push_back(tags[i]);
+        }
+    }
+  }
+}
+void makePTagsWithoutSlash(){
+        pTagsWithoutSlash.resize(0);
+        for(unsigned int i=0;i<tags_lines.size();i++){        //make tags without slash,,stored in pureTagsLinesWithoutSlash vector
+            if(tags_lines[i][0] == '/'){
+                pTagsWithoutSlash.push_back(tags_lines[i].substr(1,tags_lines[i].length()-1));
+            }else{
+                if(tags_lines[i][0] != '~'){
+                    pTagsWithoutSlash.push_back(tags_lines[i]);
+                }else{
+                    pTagsWithoutSlash.push_back(tags_lines[i]);
+                }
+            }
+    }
+}
 
