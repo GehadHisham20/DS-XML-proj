@@ -93,6 +93,14 @@ void addChild(Node* root,Node* c){
     root->child.push_back(c);
     return;
 }
+Node* getLastChild(Node* root){
+
+    if(root->child.size() == 0){
+        return root;
+    }
+    else return getLastChild(root->child[root->child.size()-1]);
+
+}
 
 //////////////////////////shaymaa
 std::vector <std::string> pureTags;
