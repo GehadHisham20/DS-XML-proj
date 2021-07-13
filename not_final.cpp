@@ -115,6 +115,20 @@ void OrderTraversal(Node * root)
     return;
 }
 
+void organizeTree (Node* root)
+{
+if (root==NULL)
+{
+    return ;
+}
+makeOneNodeForRepeatedChild (root);
+for (unsigned int i=0;i<root->child.size();i++)
+{
+       organizeTree (root->child[i]);
+}
+return;
+}
+
 void Quote (Node* root)
 {
     for (unsigned int p=0; p<root->child.size(); p++) 
