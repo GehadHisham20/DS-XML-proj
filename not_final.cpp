@@ -176,6 +176,61 @@ void Brackets(Node* root)
     }
 }
 
+void printNode (Node* root)
+{
+    
+   if (root->data == "*")
+   {
+        json+=root->insideData;
+   }
+
+    
+    else if (root->child.size() == 0)
+    {
+        if (root->parent->insideData.empty()&&(root->data[root->data.length()-1] != '}' || root->data[root->data.length()-1] != ']'))
+        {
+            json+=root->data+",";
+        }
+        else if (root->parent->insideData.empty())
+        {
+            json+=root->data;
+        }
+    }
+
+  
+   else if (root->child.size() >1 && root->child[0]->data=="*")
+   {
+        json+=root->data+":[";
+    }
+
+
+    
+    else if (root->child.size()>=1)
+    {
+        if (root->insideData.empty()&&getParent(root)==root)
+        {
+            json+=root->data+":{";
+        }
+        else if (root->insideData.empty())
+        {
+            json+=root->data+":"+root->insideData;
+        }
+    }
+
+}
+
+
+void print(Node* root)
+{
+
+    printNode(root);
+    for(unsigned int z=0;z<root->child.size();z++)
+    {
+        print(root->child[z]);
+    }
+    return;
+}
+
 ///////////////////////////Gehad
 std::vector <std::string> lines;
 std::vector <std::string> tags;
