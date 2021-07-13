@@ -410,4 +410,14 @@ void makeOneNodeForRepeatedChild(Node* root){
      }
 return;
 }
+void toJson (Node* root)
+{
 
+    root->data = "\"" + root->data + "\"";
+    Quote(root);
+    Brackets(root);
+    //regulateHyberTags(root);
+    print(root);
+    json[json.length()-1] = '}';
+    return;
+}
