@@ -148,11 +148,11 @@ void Brackets(Node* root)
                 if(o<0){o=0;}
                 if(p<0){p=0;}
                 int s1 = o+p;
-                temp1->data.insert(temp1->data.length()-s1,"6}");
+                temp1->data.insert(temp1->data.length()-s1,"}");
             }
             else
             {
-                temp1->data = temp1->data + "7}";
+                temp1->data = temp1->data + "}";
             }
         }
         else if (case2)
@@ -165,11 +165,11 @@ void Brackets(Node* root)
                 if(k<0){k=0;}
                 if(l<0){l=0;}
                 int s2 = k+l;
-                temp2->data.insert(temp2->data.length()-s2,"8]");
+                temp2->data.insert(temp2->data.length()-s2,"]");
             }
             else
             {
-                temp2->data = temp2->data + "9]";
+                temp2->data = temp2->data + "]";
             }
         }
        Brackets(root->child[y]);
