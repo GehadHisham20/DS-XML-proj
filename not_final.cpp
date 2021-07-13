@@ -245,7 +245,7 @@ void print(Node* root)
     return;
 }
 
-///////////////////////////Gehad
+///////////////////////////Gehad////////////////////////////////////////////
 std::vector <std::string> lines;
 std::vector <std::string> tags;
 std::vector <std::string> tags_lines;
@@ -326,7 +326,22 @@ Node* getLastChild(Node* root){
     else return getLastChild(root->child[root->child.size()-1]);
 
 }
-///////////////////shaymaa
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
+
+
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent)
+    , ui(new Ui::MainWindow)
+{
+    ui->setupUi(this);
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+///////////////////shaymaa////////////////////////////////////////////////////////////////////////////////////////
 std::vector <std::string> tags;
 std::vector <std::string> tags_lines;
 std::vector <std::string> pTags;  
