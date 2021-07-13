@@ -115,6 +115,19 @@ void OrderTraversal(Node * root)
     return;
 }
 
+void Quote (Node* root)
+{
+int p;
+    for(p=0;p<root->children.size();p++) 
+{
+        if(root->children[p]->data != "\*") 
+{
+            root->children[p]->data = "\"" + root->children[p]->data + "\"";
+        }
+        Quote (root->children[p]);
+    }
+}
+
 
 ///////////////////////////Gehad
 std::vector <std::string> lines;
