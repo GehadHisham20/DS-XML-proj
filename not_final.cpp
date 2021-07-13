@@ -129,40 +129,50 @@ int p;
 }
 
 
-void Brackets(Node* root){
+void Brackets(Node* root)
+{
 
-    for(int y=0;y<root->children.size();y++){
+    for (int y=0; y<root->children.size(); y++)
+    {
 
         bool case2 = (root->children.size() >= 1) && (root->children[0]->data != "\*") && (root->children[y]->children.size() != 0) && (y == root->children.size()-1);
 
         bool case3 = (root->children.size() > 1) && (root->children[0]->data == "\*") && (y == root->children.size()-1);
 
-        if( case2 ){
+        if (case2)
+        {
             Node* temp2 = getLastChild(root);
-            if(temp2->data[temp2->data.length()-1] == ']' || (temp2->data[temp2->data.length()-1] == '}') ){
+            if (temp2->data[temp2->data.length()-1] == ']' || (temp2->data[temp2->data.length()-1] == '}') )
+            {
                 int o = count(temp2->data.begin(),temp2->data.end(),']');
                 int p = count(temp2->data.begin(),temp2->data.end(),'}');
                 if(o<0){o=0;}
                 if(p<0){p=0;}
                 int s2 = o+p;
                 temp2->data.insert(temp2->data.length()-s2,"}");
-            }else{
+            }
+            else
+            {
                 temp2->data = temp2->data + "}";
             }
-        }else if( case3 ){
+        }
+        else if (case3)
+        {
             Node* temp3 = getLastChild(root->children[y]);
-            if(temp3->data[temp3->data.length()-1] == ']' || (temp3->data[temp3->data.length()-1] == '}') ){
+            if (temp3->data[temp3->data.length()-1] == ']' || (temp3->data[temp3->data.length()-1] == '}') )
+            {
                 int k = count(temp3->data.begin(),temp3->data.end(),']');
                 int l = count(temp3->data.begin(),temp3->data.end(),'}');
                 if(k<0){k=0;}
                 if(l<0){l=0;}
                 int s3 = k+l;
                 temp3->data.insert(temp3->data.length()-s3,"]");
-            }else{
+            }
+            else
+            {
                 temp3->data = temp3->data + "]";
             }
         }
-
        Brackets(root->children[y]);
     }
 }
