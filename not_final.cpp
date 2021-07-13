@@ -2,21 +2,117 @@
 
 std::vector <std::string> lines;
 
-QFile mytempfile("out.txt");
+QFile tempxml("out.txt");
 QFile myfile("myfile.txt");
 
-void loadFile(){
+void browseFile()
+{
 
-    myfile.open(QIODevice::ReadOnly |QIODevice::Text);
+    myfile.open (QIODevice::ReadOnly |QIODevice::Text);
     std::string line;
     lines.resize(0);
     while (!myfile.atEnd())
-    { line = (myfile.readLine().trimmed()).toStdString();
+    { 
+      line = (myfile.readLine().trimmed()).toStdString();
       lines.push_back(line);
     }
 
     myfile.close();
 
+}
+
+Node* getParent(Node* root)
+{
+    Node* temp = root;
+    if(temp->parent != NULL)
+    {
+       root = temp->parent;
+    }
+    return root;
+}
+Node* getMainParent(Node* root)
+{
+
+    Node* temp = root;
+    while(1)
+    {
+        if(temp->parent == NULL)
+        {
+            break;
+        }
+        else
+        {
+            temp = temp->parent;
+        }
+    }
+    return temp;
+}
+Node* Tree(std::vector<std::string> withoutSlash,Node* curr_root)
+{
+  std::stack<std::string> temp;
+
+  for(unsigned int i=0;i<withoutSlash.size();i++)
+  {    
+
+        if(i==0)
+        {
+            curr_root = newNode(withoutSlash[i]);
+            curr_root->parent = NULL;
+            std::stringstream check(withoutSlash[i]);
+            std::string s;
+            getline(check, s, ' ');
+            temp.push(s);
+            continue;
+        }
+
+        if(withoutSlash[i][0] != '~')
+        {
+            std::stringstream check(withoutSlash[i]);
+            std::string str;
+            getline(check, str, ' ');
+             if(str == temp.top())
+             {
+                temp.pop();
+                curr_root = getParent(curr_root);
+             }
+            else
+            {
+                curr_root = addChild(curr_root,withoutSlash[i]);
+                temp.push(str);
+             }
+        }
+      else
+      {
+             curr_root = addChild(curr_root,withoutSlash[i].substr(1,withoutSlash[i].length()-1));
+             curr_root = getParent(curr_root);
+      }
+  }
+  return getMainParent(curr_root);
+}
+
+
+void OrderTraversal(Node * root)
+{
+    QTextStream stream(&tempxml);
+    if (root==NULL)
+        return;
+    QList<Node *> q; 
+    q.push_back(root); 
+    while (!q.empty())
+    {
+        int i = q.size();
+        while (i > 0)
+        {
+            Node * p = q.front();
+            q.pop_front();
+            stream << QString::fromStdString(p->data) << " ";
+            for (unsigned long long i=0; i<p->child.size(); i++)
+                q.push_back(p->child[i]);
+            i--;
+        }
+        stream << "\n"; 
+    }
+    return;
 }
 
 
