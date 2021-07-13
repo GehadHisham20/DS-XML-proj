@@ -1,0 +1,81 @@
+#include<iostream>
+#include<string.h>
+#include<string>
+////////run length 
+using namespace std;
+string runlenencode(string str)
+{
+    string x;
+    int n = str.length();
+    for (int i = 0; i < n; i++)
+    {
+
+        int cnt = 1;
+        while (i < n - 1 && str[i] == str[i + 1])
+        {
+            cnt++;
+            i++;
+        }
+
+        x += str[i]+ std::to_string(cnt);
+             //+cnt;
+        // x += to_string(count) + str[i];
+        //cout << str[i] << cnt;
+    }
+    return x;
+}
+/*string runlendecode(string s) 
+{
+    int i = 0;
+    string ans = "";
+    while (i < s.length()) {
+        int j = i;
+        while (isdigit(s[j]) && (j < s.length())) 
+        {
+            j++;
+        }
+        int a = stoi(s.substr(i, j - i + 1));
+        int k = j;
+        while (isalpha(s[k]) && k < s.length()) {
+            k++;
+        }
+        auto t = s.substr(j, k - j);
+        for (int k = 0; k < a; ++k) {
+            ans += t;
+        }
+        i = k;
+    }
+    return ans;
+}*/
+string runlendecode(string s)
+{
+    string ans = "";
+    if (s != "")
+    {
+        for (int i = 0;i < s.length();i += 2)
+        {
+            char ch = s[i];
+            int cnt1 = int(s[i + 1])-48;
+           // cout << cnt1 << "lol";
+            for (int j = 0;j < cnt1;j++)
+            {
+                ans += ch;
+            }
+        }
+    }
+    return ans;
+}
+int main()
+{
+
+    //string x = "aaabdaaabac";
+    string x = "zzzzhhhhkkkombyqivdfghjklyturieowamzxncvbghyrueiks";
+   string q= runlenencode(x);
+   cout << q << endl;
+   string finall = runlendecode(q);
+   cout << finall;
+
+
+
+	return 0;
+}
