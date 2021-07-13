@@ -131,48 +131,48 @@ void Quote (Node* root)
 void Brackets(Node* root)
 {
 
-    for (int y=0; y<root->children.size(); y++)
+    for (unsigned int y=0; y<root->child.size(); y++)
     {
 
-        bool case2 = (root->children.size() >= 1) && (root->children[0]->data != "\*") && (root->children[y]->children.size() != 0) && (y == root->children.size()-1);
+        bool case1 = (root->child.size() >= 1) && (root->child[0]->data != "*") && (root->child[y]->child.size() != 0) && (y == root->child.size()-1);
 
-        bool case3 = (root->children.size() > 1) && (root->children[0]->data == "\*") && (y == root->children.size()-1);
+        bool case2 = (root->child.size() > 1) && (root->child[0]->data == "*") && (y == root->child.size()-1);
 
-        if (case2)
+        if (case1)
         {
-            Node* temp2 = getLastChild(root);
-            if (temp2->data[temp2->data.length()-1] == ']' || (temp2->data[temp2->data.length()-1] == '}') )
+            Node* temp1 = getLastChild(root);
+            if (temp1->data[temp1->data.length()-1] == ']' || (temp1->data[temp1->data.length()-1] == '}') )
             {
-                int o = count(temp2->data.begin(),temp2->data.end(),']');
-                int p = count(temp2->data.begin(),temp2->data.end(),'}');
+                int o = count(temp1->data.begin(),temp1->data.end(),']');
+                int p = count(temp1->data.begin(),temp1->data.end(),'}');
                 if(o<0){o=0;}
                 if(p<0){p=0;}
-                int s2 = o+p;
-                temp2->data.insert(temp2->data.length()-s2,"}");
+                int s1 = o+p;
+                temp1->data.insert(temp1->data.length()-s1,"6}");
             }
             else
             {
-                temp2->data = temp2->data + "}";
+                temp1->data = temp1->data + "7}";
             }
         }
-        else if (case3)
+        else if (case2)
         {
-            Node* temp3 = getLastChild(root->children[y]);
-            if (temp3->data[temp3->data.length()-1] == ']' || (temp3->data[temp3->data.length()-1] == '}') )
+            Node* temp2 = getLastChild(root->child[y]);
+            if (temp2->data[temp2->data.length()-1] == ']' || (temp2->data[temp2->data.length()-1] == '}') )
             {
-                int k = count(temp3->data.begin(),temp3->data.end(),']');
-                int l = count(temp3->data.begin(),temp3->data.end(),'}');
+                int k = count(temp2->data.begin(),temp2->data.end(),']');
+                int l = count(temp2->data.begin(),temp2->data.end(),'}');
                 if(k<0){k=0;}
                 if(l<0){l=0;}
-                int s3 = k+l;
-                temp3->data.insert(temp3->data.length()-s3,"]");
+                int s2 = k+l;
+                temp2->data.insert(temp2->data.length()-s2,"8]");
             }
             else
             {
-                temp3->data = temp3->data + "]";
+                temp2->data = temp2->data + "9]";
             }
         }
-       Brackets(root->children[y]);
+       Brackets(root->child[y]);
     }
 }
 
