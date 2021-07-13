@@ -230,4 +230,69 @@ void makePTagsWithoutSlash(){
             }
     }
 }
+void showChild(Node* root){
+    tempxml.open(QIODevice::ReadWrite |QIODevice::Text);
+    QTextStream stream(&tempxml);
+    int size = root->child.size();
+    for(int x=0;x<size;x++){
+        stream << QString::fromStdString(root->child[x]->data)<<"\t";
+    }
+    stream<<"\n";
+    tempxml.close();
+    return;
+}
+
+
+
+
+
+
+bool check(Node* root){
+
+    if(root->child.size() == 0){
+        return true;
+    }
+    else return false;
+
+}
+
+
+
+void makeOneNodeForRepeatedChild(Node* root){
+
+      if(root->child.size() < 1){
+            return;
+      }
+      std::vector<std::string>temp;
+      std::vector<std::string>rep;
+
+     for(unsigned int x=0;x<root->child.size();x++){
+        if(root->child[x]->data != "*"){
+            temp.push_back(root->child[x]->data);
+        }
+     }
+
+     for(unsigned int x=0;x<temp.size();x++){
+        if(count(temp.begin(),temp.end(),temp[x]) > 1  && count(rep.begin(),rep.end(),temp[x]) == 0){
+            rep.push_back(temp[x]);
+        }
+     }
+
+     for(unsigned int i=0;i<rep.size();i++){
+        Node* s = newNode(rep[i]);
+        for(unsigned int y=0;y<root->child.size();y++){
+            if(root->child[y]->data == rep[i]){
+                root->child[y]->data = '*';
+                root->child[y]->parent = s;
+                addChild(s,root->child[y]);
+                root->child.erase(root->child.begin()+y);
+                y--;
+            }
+
+        }
+        addChild(root,s);
+        s->parent = root;
+     }
+return;
+}
 
