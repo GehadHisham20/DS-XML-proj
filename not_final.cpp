@@ -341,6 +341,47 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+void MainWindow::on_OpenFileButton_clicked()
+{
+    ui->input_text->clear();
+    QFile input_file(QFileDialog::getOpenFileName(this,tr("Open File"),"",tr("XML File (*.xml) ;;TextFile (*.txt)")));
+    input_file.open(QIODevice::ReadOnly |QIODevice::Text);
+    QTextStream stream(&input_file);
+    QString text= stream.readAll();
+    myfile.remove();
+    tempxml.resize(0);
+    input_file.copy("myfile.txt");
+    QFile myfile("myfile.txt");
+    ui->input_text->setPlainText(text);
+    ui->input_text->setLineWrapMode(QPlainTextEdit::NoWrap);
+   input_file.close();
+}
+void MainWindow::on_Save_Button_clicked()
+{
+ QFile output_file(QFileDialog::getSaveFileName(this,tr("Save File"),"",tr("Text File ()*.txt;;XML File ()*.xml")));
+ output_file.open(QIODevice::ReadWrite|QIODevice::Text);
+ QString text=ui->output_text->toPlainText();
+     output_file.write(text.toUtf8());
+     output_file.close();
+}
+void MainWindow::on_Check_Button_clicked()
+{}
+void MainWindow::on_Remove_Spaces_clicked()  //compress
+{}
+void MainWindow::on_Prettify_Button_clicked()
+{}
+void MainWindow::on_Correct_Button_clicked()
+{}
+void MainWindow::on_Reset_button_clicked()
+{
+        qApp->quit();
+        QProcess::startDetached(qApp->arguments()[0], qApp->arguments());
+}
+
+void MainWindow::on_Exit_Button_clicked()
+{
+    qApp->quit();
+}
 ///////////////////shaymaa////////////////////////////////////////////////////////////////////////////////////////
 std::vector <std::string> tags;
 std::vector <std::string> tags_lines;
