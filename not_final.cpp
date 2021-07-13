@@ -117,14 +117,13 @@ void OrderTraversal(Node * root)
 
 void Quote (Node* root)
 {
-int p;
-    for (p=0; p<root->children.size(); p++) 
+    for (unsigned int p=0; p<root->child.size(); p++) 
 {
-        if (root->children[p]->data != "\*") 
+        if(root->child[p]->data != "*"&&!check(root->child[p]))
 {
-            root->children[p]->data = "\"" + root->children[p]->data + "\"";
+            root->child[p]->data = "\"" + root->child[p]->data + "\"";
         }
-        Quote (root->children[p]);
+        Quote (root->child[p]);
     }
 }
 
