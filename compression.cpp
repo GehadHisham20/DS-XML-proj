@@ -229,3 +229,30 @@ void Hufftree(string x)
 		int sum = left->freq + right->freq;
 		pq.push(new_node('\0', sum, left, right));
 	}
+	Node* root = pq.top();
+	unordered_map<char, string> huff_exp;
+	encode(root, "", huff_exp);
+	string str = "";
+	for (char ch : x) {
+		str += huff_exp[ch];
+	}
+	cout << "Encoded string :\n" << str << '\n';
+
+	int idx = -1;
+	cout << "Decoded string : \n";
+	while (idx < (int)str.size() - 2) {
+		decode(root, idx, str);
+	}
+}
+
+
+int main()
+{
+	string y = "MISSISSIPPI RIVER";
+	string x = "hbuoibocbocbdocpspspppjbdbsbibos";
+	Hufftree(x);
+	cout << endl;
+	Hufftree(y);
+
+	return 0;
+}
