@@ -575,7 +575,7 @@ std::vector<unsigned int> errors;
 std::vector<std::string> tagsErrors;
 std::vector<int> Cases;
 
-void findMistakesLines() {
+void findError() {
     errors.resize(0);
     tagsErrors.resize(0);
     Cases.resize(0);
