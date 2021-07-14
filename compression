@@ -1,3 +1,58 @@
+/*///////////byte pair technique 
+#include <iostream>
+#include<string>
+#include<string.h>
+#include <map>
+using namespace std;
+pair<int, int> fndmax(map<char, int> sampleMap)
+{
+    pair<char, int> maxval = make_pair(0, 0);
+
+    // Iterate in the map to find the required entry
+    map<char, int>::iterator currentEntry;
+    for (currentEntry = sampleMap.begin(); currentEntry != sampleMap.end();++currentEntry)
+    {
+
+        if (currentEntry->second> maxval.second) 
+        { 
+            maxval= make_pair(currentEntry->first,currentEntry->second);
+        }
+    }
+
+    return maxval;
+}
+
+
+string bytepair(string x)
+{
+    //string news;
+
+	map<char, int>mp;
+	for (int i = 0;i < x.length();i++)
+	{	
+			mp[x[i] + x[i+1]] = 0;
+
+	}
+	for (int i = 0;i < x.length();i++)
+	{
+		if (mp[x[i] + x[i + 1]])
+			mp[x[i] + x[i + 1]]++;
+	}
+    pair<char, int> a = fndmax(mp);
+    bool fnd = 0;
+    for (int i = 0;i < x.length();i++)
+    {
+        for (i = 'a';i <= 'z';i++)
+        {
+            if ('a' != x[i])
+                fnd = 1;
+
+        }
+    }
+
+    
+}*/
+///////////////run length
 #include<iostream>
 #include<string.h>
 #include<string>
