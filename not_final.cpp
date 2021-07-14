@@ -287,6 +287,37 @@ void correctError()
   }
   return;
 }
+
+void MainWindow::on_Minify_Button_clicked()
+{
+    ui->output_text->clear();
+    ui->output_text->setLineWrapMode(QPlainTextEdit::LineWrapMode::WidgetWidth);
+          QFile tagsfile("mytags.txt");
+          tagsfile.resize(0);
+          tempxml.resize(0);
+             generatefile(&myfile,&tagsfile);
+
+
+             tagsfile.open(QIODevice::ReadWrite |QIODevice::Text);
+             tempxml.open(QIODevice::ReadWrite |QIODevice::Text);
+             QTextStream str(&tempxml);
+             QString word;
+
+             while (!tagsfile.atEnd())
+             { word = tagsfile.readLine().trimmed();
+                if(word.isEmpty()){continue;}
+                  str<<word;
+             }
+             tempxml.close();
+             tempxml.open(QIODevice::ReadWrite |QIODevice::Text);
+             QTextStream strq(&tempxml);
+             ui->output_text->setPlainText(strq.readAll());
+             tempxml.close();
+             tagsfile.close();
+
+}
+
+
 ///////////////////////////Gehad////////////////////////////////////////////
 std::vector <std::string> lines;
 std::vector <std::string> tags;
