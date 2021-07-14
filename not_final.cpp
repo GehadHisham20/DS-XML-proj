@@ -571,3 +571,18 @@ int classification(QString w) {//1:opening 2:closing 3:value  4:lone tag  5:comm
     }
     return 3;
 }
+std::vector<unsigned int> errors;
+std::vector<std::string> tagsErrors;
+std::vector<int> Cases;
+
+void findMistakesLines() {
+    errors.resize(0);
+    tagsErrors.resize(0);
+    Cases.resize(0);
+
+    for (unsigned int k = 0;k < lines.size();k++) {
+
+        if (lines[k].empty()) {
+            tagsErrors.push_back(lines[k]);
+            continue;
+        }
