@@ -463,6 +463,40 @@ void MainWindow::on_Prettify_Button_clicked()
              int l = 0;
              int curr,pre;
              int out=ui->input_text->blockCount();
+    if(out<8000){
+             while (!tagsfile.atEnd())
+          {
+            format.setForeground( QBrush( QColor(Qt::blue) ) );
+             word = tagsfile.readLine().trimmed();
+             if(word.isEmpty()){continue;}
+             curr=classification(word);
+             pre=classification(wordpre);
+
+          //opening
+              if(curr==1){
+                  if(pre==0)
+                  {
+                  cursor.setCharFormat( format );
+                  cursor.insertText( word );
+                  l=l+1;
+                  }
+                  else if(pre==1)
+                  {
+                  cursor.insertText("\n");
+                  for(int i=0;i<l;i++){cursor.insertText("  ");}
+                  cursor.setCharFormat( format );
+                  cursor.insertText( word );
+                  l=l+1;
+                  }
+                  else
+                  {
+                  cursor.insertText("\n");
+                  for(int i=0;i<l;i++){cursor.insertText("  ");}
+                  cursor.setCharFormat( format );
+                  cursor.insertText( word );
+                  l=l+1;
+                  }
+              }
     
 }
 void MainWindow::on_Reset_button_clicked()
