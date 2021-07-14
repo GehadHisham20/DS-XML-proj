@@ -436,10 +436,35 @@ void MainWindow::on_Check_Button_clicked()
 {}
 void MainWindow::on_Minify_Button_clicked()  
 {}
-void MainWindow::on_Prettify_Button_clicked()
-{}
+
 void MainWindow::on_Correct_Button_clicked()
 {}
+
+
+void MainWindow::on_Prettify_Button_clicked()
+{
+    QTextCursor cursor( ui->output_text->textCursor() );
+    QTextCharFormat format;
+    format.setFontWeight( QFont::TypeWriter );
+
+
+
+       ui->output_text->clear();
+       ui->output_text->setLineWrapMode(QPlainTextEdit::NoWrap);
+       QFile tagsfile("mytags.txt");
+        tagsfile.resize(0);
+          generatefile(&myfile,&tagsfile);
+        tempxml.resize(0);
+        tempxml.open(QIODevice::ReadWrite |QIODevice::Text);
+        QTextStream str(&tempxml);
+        tagsfile.open(QIODevice::ReadOnly |QIODevice::Text);
+
+             QString word,wordpre;
+             int l = 0;
+             int curr,pre;
+             int out=ui->input_text->blockCount();
+    
+}
 void MainWindow::on_Reset_button_clicked()
 {
         qApp->quit();
