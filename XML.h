@@ -36,7 +36,7 @@ private slots:
 
     void on_JSON_Button_clicked();
 
-    void on_Minify_Button_clicked()
+    void on_Minify_Button_clicked();
 
     void on_Check_Button_clicked();
 
