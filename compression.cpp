@@ -1,4 +1,4 @@
-/*///////////byte pair technique 
+/*///////////////////////////////byte pair technique 
 #include <iostream>
 #include<string>
 #include<string.h>
@@ -52,7 +52,7 @@ string bytepair(string x)
 
     
 }*/
-///////////////run length
+///////////////////////////////////////////////run length//////////////////////////////
 #include<iostream>
 #include<string.h>
 #include<string>
@@ -136,7 +136,7 @@ int main()
 
 	return 0;
 }
-////////////////huffman 
+/////////////////////////////////////////////////////huffman ///////////////////
 #include <iostream>
 #include <string>
 #include <queue>
