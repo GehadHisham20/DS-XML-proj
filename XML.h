@@ -28,7 +28,7 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_OpenFileButton_clicked();
+    void on_Browse_Button_clicked();
 
     void on_Prettify_Button_clicked();
 
@@ -36,7 +36,7 @@ private slots:
 
     void on_JSON_Button_clicked();
 
-    void on_Remove_Spaces_clicked();
+    void on_Minify_Button_clicked()
 
     void on_Check_Button_clicked();
 
