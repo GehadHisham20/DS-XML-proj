@@ -341,7 +341,7 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
-void MainWindow::on_OpenFileButton_clicked()
+void MainWindow::on_Browse_Button_clicked()
 {
     ui->input_text->clear();
     QFile input_file(QFileDialog::getOpenFileName(this,tr("Open File"),"",tr("XML File (*.xml) ;;TextFile (*.txt)")));
@@ -434,7 +434,7 @@ void MainWindow::on_JSON_Button_clicked()
 }
 void MainWindow::on_Check_Button_clicked()
 {}
-void MainWindow::on_Remove_Spaces_clicked()  //compress
+void MainWindow::on_Minify_Button_clicked()  
 {}
 void MainWindow::on_Prettify_Button_clicked()
 {}
