@@ -329,7 +329,29 @@ Node* getLastChild(Node* root){
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+void generatefile(QFile *input,QFile *output){
+    (*input).open(QIODevice::ReadWrite |QIODevice::Text);
+    (*output).open(QIODevice::ReadWrite |QIODevice::Text);
+    QTextStream stream(output);
+    QString l;
+    QChar t;
 
+    while (!myfile.atEnd())
+    { l = myfile.readLine();
+
+        for (auto o:l)
+        {
+           if(o=='\n'||o=='\t'){t=o;continue;}
+           if((o=='<')&&(t=='\n')){stream<<o;t=o;continue;}
+           if((o=='<')&&(t=='>')){stream<<'\n'<<o;t=o;continue;}
+           if(o=='>'){stream<<o<<'\n';t=o;continue;}
+           stream<<o;
+        }
+    }
+
+    (*input).close();
+    (*output).close();
+}
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
