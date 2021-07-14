@@ -847,20 +847,6 @@ void showChild(Node* root){
 
 
 
-
-
-
-bool check(Node* root){
-
-    if(root->child.size() == 0){
-        return true;
-    }
-    else return false;
-
-}
-
-
-
 void makeOneNodeForRepeatedChild(Node* root){
 
       if(root->child.size() < 1){
