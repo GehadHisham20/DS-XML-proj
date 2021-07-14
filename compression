@@ -193,3 +193,11 @@ void decode(Node* root, int& idx, string str)
 		cout << root->ch;
 		return;
 	}
+
+	idx++;
+
+	if (str[idx] == '0')
+		decode(root->left, idx, str);
+	else
+		decode(root->right, idx, str);
+}
