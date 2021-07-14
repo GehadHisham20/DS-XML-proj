@@ -497,6 +497,30 @@ void MainWindow::on_Prettify_Button_clicked()
                   l=l+1;
                   }
               }
+                 //closing
+              else if (curr==2){
+                  if(pre==1)
+                  {
+                      cursor.setCharFormat( format );
+                      cursor.insertText( word );
+                      l=l-1;
+                  }
+                  if(pre==2)
+                  {
+                      l=l-1;
+                      cursor.insertText("\n");
+                      for(int i=0;i<l;i++){cursor.insertText("  ");}
+                      cursor.setCharFormat( format );
+                      cursor.insertText( word );
+                  }
+                  else
+                  {
+
+                      cursor.setCharFormat( format );
+                      cursor.insertText( word );
+                      l=l-1;
+                  }
+              }
     
 }
 void MainWindow::on_Reset_button_clicked()
