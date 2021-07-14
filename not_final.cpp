@@ -626,4 +626,7 @@ void findMistakesLines() {
         else if (tagsErrors[j - 1][0] == '~') {
             continue;
         }
-
+if (tagsErrors[j - 1].find('/') == std::string::npos) {
+            temp.push_back(tagsErrors[j - 1]);
+            in.push_back(j);
+        }
