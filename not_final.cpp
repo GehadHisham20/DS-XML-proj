@@ -595,3 +595,15 @@ void findMistakesLines() {
             tagsErrors.push_back("~" + lines[k]);
             continue;
         }
+
+        for (int l = 0;l < counter;l++) {
+            if (l == 0) {
+                std::string s = lines[k].substr(p1 + 1, p2 - p1 - 1);
+                s = s.substr(0, s.find(' '));
+                tagsErrors.push_back(s);
+            }
+            else {
+                std::string s = lines[k].substr(p1 + 1, p2 - p1 - 1);
+                s = s.substr(0, s.find(' '));
+                tagsErrors.back() = tagsErrors.back() + "-" + s;
+            }
