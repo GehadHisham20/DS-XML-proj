@@ -607,3 +607,10 @@ void findMistakesLines() {
                 s = s.substr(0, s.find(' '));
                 tagsErrors.back() = tagsErrors.back() + "-" + s;
             }
+
+            int p3 = lines[k].find('<', p1 + 1);
+            int p4 = lines[k].find('>', p2 + 1);
+            p1 = p3;
+            p2 = p4;
+        }
+    }
