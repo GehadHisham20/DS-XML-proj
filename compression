@@ -24,6 +24,7 @@ string runlenencode(string str)
     }
     return x;
 }
+//compliixtity o(n)
 /*string runlendecode(string s) 
 {
     int i = 0;
@@ -65,6 +66,7 @@ string runlendecode(string s)
     }
     return ans;
 }
+//complixity o(n)
 int main()
 {
 
