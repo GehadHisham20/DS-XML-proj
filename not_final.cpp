@@ -614,3 +614,6 @@ void findMistakesLines() {
             p2 = p4;
         }
     }
+
+    std::vector<std::string> temp;
+    std::vector<int> in;
