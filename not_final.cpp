@@ -653,3 +653,13 @@ if (tagsErrors[j - 1].find('/') == std::string::npos) {
                         in.pop_back();
                         j--;
                     }
+      else {
+                        errors.push_back(j);
+                        Cases.push_back(2);
+                        temp.pop_back();
+                        in.pop_back();
+                    }
+                }
+            }
+        }
+    }
