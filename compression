@@ -201,3 +201,31 @@ void decode(Node* root, int& idx, string str)
 	else
 		decode(root->right, idx, str);
 }
+
+void Hufftree(string x)
+{
+	unordered_map<char, int> freq;
+	for (char ch : x) 
+	{
+		freq[ch]++;
+	}
+
+	// piroty queue to know what node to add next acc to huffman tree
+	priority_queue<Node*, vector<Node*>, comp> pq;
+
+	for (auto nxtnode : freq)
+	{
+		pq.push(new_node(nxtnode.first, nxtnode.second, nullptr, nullptr));
+	}
+
+	while (pq.size() != 1)
+	{
+		// Remove the two nodes of highest priority = lowest frequency 
+		
+		Node* left = pq.top(); pq.pop();
+		Node* right = pq.top();	pq.pop();
+
+		//new node =sum of two least frequancy node 
+		int sum = left->freq + right->freq;
+		pq.push(new_node('\0', sum, left, right));
+	}
