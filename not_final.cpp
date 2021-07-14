@@ -640,3 +640,9 @@ if (tagsErrors[j - 1].find('/') == std::string::npos) {
                     temp.push_back(intermediate);
                     in.push_back(j);
                 }
+  else {
+                    std::string s = intermediate.substr(1, intermediate.length() - 1);
+                    if (temp.back() == s) {
+                        temp.pop_back();
+                        in.pop_back();
+                    }
