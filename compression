@@ -136,3 +136,49 @@ int main()
 
 	return 0;
 }
+////////////////huffman 
+#include <iostream>
+#include <string>
+#include <queue>
+#include <unordered_map>
+using namespace std;
+
+class Node {
+public:
+	int freq;
+	char ch;
+	Node* left;
+	Node* right;
+};
+
+Node* new_node(char ch, int freq, Node* left, Node* right)
+{
+	Node* node = new Node();
+	node->ch = ch;
+	node->freq = freq;
+	node->left = left;
+	node->right = right;
+	return node;
+}
+// it is used to know which is smaller to be added to huffmen tree
+struct comp
+{
+	bool operator()(Node* l, Node* r)
+	{
+		// highest priority item has lowest frequency
+		return l->freq > r->freq;
+	}
+};
+
+void encode(Node* root, string a,unordered_map<char, string>& huff_exp)
+{
+	if (root == nullptr)
+		return;
+
+	if (!root->left && !root->right) {
+		huff_exp[root->ch] =a ;
+	}
+
+	encode(root->left, a + "0", huff_exp);
+	encode(root->right, a + "1", huff_exp);
+}
