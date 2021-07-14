@@ -634,3 +634,9 @@ if (tagsErrors[j - 1].find('/') == std::string::npos) {
             std::stringstream check1(tagsErrors[j - 1]);
 
             std::string intermediate;
+             while (getline(check1, intermediate, '-'))
+            {
+                if (intermediate.find('/') == std::string::npos) {
+                    temp.push_back(intermediate);
+                    in.push_back(j);
+                }
