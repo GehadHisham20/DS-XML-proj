@@ -182,3 +182,8 @@ void encode(Node* root, string a,unordered_map<char, string>& huff_exp)
 	encode(root->left, a + "0", huff_exp);
 	encode(root->right, a + "1", huff_exp);
 }
+void decode(Node* root, int& idx, string str)
+{
+	if (root == nullptr) {
+		return;
+	}
