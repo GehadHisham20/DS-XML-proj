@@ -317,6 +317,50 @@ void MainWindow::on_Minify_Button_clicked()
 
 }
 
+void MainWindow::on_Check_Button_clicked()
+{   if(errors.size() == 0)
+    {
+     QMessageBox error1;
+
+     error1.setText("XML File is Correct");
+     error1.exec();
+     return;
+    }
+    else
+    {
+    lines.resize(0);
+    ui->output_text->clear();
+    std::string line;
+    QTextCharFormat format;
+    QTextCursor cursor( ui->output_text->textCursor() );
+     browseFile();
+     findError();
+     int j =0;
+       for (unsigned int i=1;i<lines.size()+1;i++)
+       {
+           line=lines[i-1];
+           if (i==errors[j])
+           {
+               format.setFontWeight( QFont::TypeWriter );
+               format.setForeground( QBrush( QColor(Qt::red) ) );
+               cursor.setCharFormat( format );
+               cursor.insertText(QString::fromStdString(line));
+               if(cursor.PreviousCharacter != '\n'){cursor.insertText("\n");}
+               j++;
+           }
+           else
+           {
+               format.setFontWeight( QFont::TypeWriter );
+               format.setForeground( QBrush( QColor(Qt::black) ) );
+               cursor.setCharFormat( format );
+               cursor.insertText(QString::fromStdString(line));
+               if(cursor.PreviousCharacter != '\n'){cursor.insertText("\n");}
+           }
+       }
+     }
+
+return;
+}
 
 ///////////////////////////Gehad////////////////////////////////////////////
 std::vector <std::string> lines;
