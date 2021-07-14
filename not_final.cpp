@@ -630,3 +630,7 @@ if (tagsErrors[j - 1].find('/') == std::string::npos) {
             temp.push_back(tagsErrors[j - 1]);
             in.push_back(j);
         }
+      else {
+            std::stringstream check1(tagsErrors[j - 1]);
+
+            std::string intermediate;
