@@ -617,3 +617,13 @@ void findMistakesLines() {
 
     std::vector<std::string> temp;
     std::vector<int> in;
+    for (unsigned int j = 1;j < tagsErrors.size() + 1;j++) {
+
+        if (tagsErrors[j - 1].empty()) {
+            errors.push_back(j);
+            continue;
+        }
+        else if (tagsErrors[j - 1][0] == '~') {
+            continue;
+        }
+
