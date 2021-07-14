@@ -364,6 +364,74 @@ void MainWindow::on_Save_Button_clicked()
      output_file.write(text.toUtf8());
      output_file.close();
 }
+void MainWindow::on_JSON_Button_clicked()
+{    tempxml.resize(0);
+     tempxml.open(QIODevice::ReadWrite |QIODevice::Text);
+     QTextStream st(& tempxml);
+
+      browseFile();   
+
+      getTags_Lines();      
+
+      makePTags();         
+
+      makePTagsWithoutSlash();              
+
+      Node* curr = NULL;
+
+      curr = Tree(pTagsWithoutSlash,curr);      
+
+      organizeTree(curr);                                         
+
+      toJson(curr);                       
+
+      st<<QString::fromStdString(json);        
+      tempxml.close();
+      tempxml.open(QIODevice::ReadWrite |QIODevice::Text);
+      QTextStream strq(&tempxml);
+      ui->output_text->setLineWrapMode(QPlainTextEdit::LineWrapMode::NoWrap);
+      ui->output_text->clear();
+      QString out=strq.readAll();
+      QChar prev;
+       int l=0;
+       for(auto o:out)
+      {
+          if(o=='{'){
+              ui->output_text->insertPlainText(o);
+              ui->output_text->insertPlainText("\n");
+              l=l+1;
+          }
+          else if(o=='}'){
+
+              ui->output_text->insertPlainText("\n");
+              ui->output_text->insertPlainText(o);
+              l=l-1;}
+          else if(o=='['){
+              ui->output_text->insertPlainText(o);
+              ui->output_text->insertPlainText("\n");
+              l=l+1;}
+          else if(o==']'){
+
+              ui->output_text->insertPlainText("\n");
+               ui->output_text->insertPlainText(o);
+               l=l-1;}
+          else if(o==',')
+          {
+              ui->output_text->insertPlainText(o);
+              ui->output_text->insertPlainText("\n");
+          }
+          else {ui->output_text->insertPlainText(o);}
+          prev=o;
+      }
+      tempxml.close();
+      json = "{";
+      lines.resize(0);
+       tags.resize(0);
+       tags_lines.resize(0);
+       pTags.resize(0);
+      pTagsWithoutSlash.resize(0);
+       return;
+}
 void MainWindow::on_Check_Button_clicked()
 {}
 void MainWindow::on_Remove_Spaces_clicked()  //compress
