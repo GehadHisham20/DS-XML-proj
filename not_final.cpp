@@ -521,8 +521,118 @@ void MainWindow::on_Prettify_Button_clicked()
                       l=l-1;
                   }
               }
-    
+                  //value
+              else if(curr==3){
+
+                  format.setForeground( QBrush( QColor(Qt::black) ) );
+                  cursor.setCharFormat(format);
+                  cursor.insertText( word );
+               }
+          //lone tag
+              else if(curr==4){
+
+                  cursor.insertText("\n");
+                  for(int i=0;i<l;i++){cursor.insertText("  ");}
+                  format.setForeground( QBrush( QColor(Qt::darkMagenta) ) );
+                  cursor.setCharFormat( format );
+                  cursor.insertText( word );
+              }
+          //comment or prolog
+              else {
+                  cursor.insertText("\n");
+                  format.setForeground( QBrush( QColor(Qt::darkGreen) ) );
+                  cursor.setCharFormat( format );
+                  cursor.insertText( word );
+              }
+          wordpre=word;
+             }
+             cursor.~QTextCursor();
+             format.setForeground( QBrush( QColor(Qt::black) ) );
+             ui->output_text->setCurrentCharFormat(format);
+             }
+
+         else{
+                format.setForeground( QBrush( QColor(Qt::black) ) );
+                 while (!tagsfile.atEnd())
+                           {
+
+                     word = tagsfile.readLine().trimmed();
+                     if(word.isEmpty()){continue;}
+                     curr=classification(word);
+                     pre=classification(wordpre);
+
+                           //opening
+                               if(curr==1){
+                                   if(pre==0)
+                                   {
+                                   str<<word;
+                                   l=l+1;
+                                   }
+                                   else if(pre==1)
+                                   {
+                                   str<<"\n";
+                                   for(int i=0;i<l;i++){str<<"  ";}
+                                   str<<word;
+                                   l=l+1;
+                                   }
+                                   else
+                                   {
+                                   str<<"\n";
+                                   for(int i=0;i<l;i++){str<<"  ";}
+                                   str<<word;
+                                   l=l+1;
+                                   }
+                               }
+                           //closing
+                               else if (curr==2){
+                                   if(pre==1)
+                                   {
+                                       str<<word;
+                                       l=l-1;
+                                   }
+                                   if(pre==2)
+                                   {
+                                       l=l-1;
+                                       str<<"\n";
+                                       for(int i=0;i<l;i++){str<<"  ";}
+                                       str<<word;
+                                   }
+                                   else
+                                   {
+                                       str<<word;
+                                       l=l-1;
+                                   }
+                               }
+                           //value
+                               else if(curr==3){
+                                   str<<word;
+                                }
+                           //lone tag
+                               else if(curr==4){
+                                   str<<"\n";
+                                   for(int i=0;i<l;i++){str<<"  ";}
+                                   str<<word;
+                               }
+                           //comment or prolog
+                               else {
+                                   str<<"\n";
+                                   str<<word;
+                               }
+                           wordpre=word;
+                           }
+                 tempxml.close();
+                    tempxml.open(QIODevice::ReadWrite |QIODevice::Text);
+                    QTextStream strq(&tempxml);
+                    ui->output_text->clear();
+                    QString t=strq.readAll();
+                    ui->output_text->setPlainText(t);
+
+         }
+             tagsfile.close();
+             tempxml.close();
 }
+    
+
 void MainWindow::on_Reset_button_clicked()
 {
         qApp->quit();
