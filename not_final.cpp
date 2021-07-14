@@ -591,3 +591,7 @@ void findMistakesLines() {
         int counter = std::count(lines[k].begin(), lines[k].end(), '<');
         int p1 = lines[k].find('<');
         int p2 = lines[k].find('>');
+    if (counter == 0) {
+            tagsErrors.push_back("~" + lines[k]);
+            continue;
+        }
