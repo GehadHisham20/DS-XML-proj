@@ -663,3 +663,6 @@ if (tagsErrors[j - 1].find('/') == std::string::npos) {
             }
         }
     }
+ sort(errors.begin(), errors.end());
+    return;
+}
