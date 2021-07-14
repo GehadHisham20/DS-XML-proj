@@ -586,3 +586,8 @@ void findMistakesLines() {
             tagsErrors.push_back(lines[k]);
             continue;
         }
+    if (classification(QString::fromStdString(lines[k])) == 4 || classification(QString::fromStdString(lines[k])) == 5 || classification(QString::fromStdString(lines[k])) == 6) { continue; }
+
+        int counter = std::count(lines[k].begin(), lines[k].end(), '<');
+        int p1 = lines[k].find('<');
+        int p2 = lines[k].find('>');
