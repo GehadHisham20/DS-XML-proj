@@ -187,3 +187,9 @@ void decode(Node* root, int& idx, string str)
 	if (root == nullptr) {
 		return;
 	}
+
+	if (!root->left && !root->right)
+	{
+		cout << root->ch;
+		return;
+	}
