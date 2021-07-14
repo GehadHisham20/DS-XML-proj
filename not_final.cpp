@@ -646,3 +646,10 @@ if (tagsErrors[j - 1].find('/') == std::string::npos) {
                         temp.pop_back();
                         in.pop_back();
                     }
+                    else if (temp[temp.size() - 2] == s) {
+                        errors.push_back(in.back());
+                        Cases.push_back(1);
+                        temp.pop_back();
+                        in.pop_back();
+                        j--;
+                    }
