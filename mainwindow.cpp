@@ -356,7 +356,7 @@ void printNode(Node* root){
         json+=root->insideData;
    }
 
-    else if(root->insideData.size() == 0){
+    else if(root->child.size() == 0){
         if(root->parent->insideData.empty()&& (root->data[root->data.length()-1] != '}' || root->data[root->data.length()-1] != ']')){
             json+=root->data+",";
         }else if(root->parent->insideData.empty()){
