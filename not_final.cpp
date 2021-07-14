@@ -245,6 +245,48 @@ void print(Node* root)
     return;
 }
 
+void correctError() 
+{
+  if (Cases.size()>0)
+  {
+   for(unsigned int i=0;i<errors.size();i++)
+   {
+    if (Cases[i] == 2)
+    {
+        std::string str1;
+        std::stringstream c1 (lines[errors[i]-1]);
+        getline(c1, lines[errors[i]-1] , '/');
+        std::string temp = lines[errors[i]-1].substr(0,lines[errors[i]-1].length()-1);
+        std::stringstream check2( temp );
+        getline(check2, str1 , '>');
+        lines[errors[i]-1] = temp + "</" + str1.substr(1,str1.find_first_of(' ')) +">";
+
+    }
+    if (Cases[i] == 1 && lines[errors[i]-1][lines[errors[i]-1].length()-1] != '>')
+    {
+        std::string str2;
+        std::stringstream c2( lines[errors[i]-1] );
+        getline(c2, str2 , '>');
+        lines[errors[i]-1] = lines[errors[i]-1] + "</" + str2.substr(1,str2.find_first_of(' ')) +">";
+    }
+    else if (Cases[i]==1)
+    {
+        std::string str3;
+        std::stringstream c3( lines[errors[i]-1] );
+        getline(c3, str3 , '>');
+        for(unsigned int j=0;j<lines.size();j++)
+        {
+            if(lines[j].empty())
+            {
+                lines[j] = "</" + str3.substr(1,str3.find_first_of(' ')) +">";
+            }
+        }
+    }
+
+   }
+  }
+  return;
+}
 ///////////////////////////Gehad////////////////////////////////////////////
 std::vector <std::string> lines;
 std::vector <std::string> tags;
@@ -329,29 +371,7 @@ Node* getLastChild(Node* root){
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-void generatefile(QFile *input,QFile *output){
-    (*input).open(QIODevice::ReadWrite |QIODevice::Text);
-    (*output).open(QIODevice::ReadWrite |QIODevice::Text);
-    QTextStream stream(output);
-    QString l;
-    QChar t;
 
-    while (!myfile.atEnd())
-    { l = myfile.readLine();
-
-        for (auto o:l)
-        {
-           if(o=='\n'||o=='\t'){t=o;continue;}
-           if((o=='<')&&(t=='\n')){stream<<o;t=o;continue;}
-           if((o=='<')&&(t=='>')){stream<<'\n'<<o;t=o;continue;}
-           if(o=='>'){stream<<o<<'\n';t=o;continue;}
-           stream<<o;
-        }
-    }
-
-    (*input).close();
-    (*output).close();
-}
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
