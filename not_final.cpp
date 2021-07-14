@@ -106,8 +106,8 @@ void OrderTraversal(Node * root)
             Node * p = q.front();
             q.pop_front();
             stream << QString::fromStdString(p->data) << " ";
-            for (unsigned long long i=0; i<p->child.size(); i++)
-                q.push_back(p->child[i]);
+            for (unsigned long long j=0; j<p->child.size(); j++)
+                q.push_back(p->child[j]);
             i--;
         }
         stream << "\n"; 
