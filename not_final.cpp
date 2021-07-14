@@ -559,3 +559,15 @@ void toJson (Node* root)
     json[json.length()-1] = '}';
     return;
 }
+int classification(QString w) {//1:opening 2:closing 3:value  4:lone tag  5:comment  6:prolog
+   if(w.isEmpty()){return 0;}
+    if((w[0]=='<')&&w[w.length()-1]=='>')
+    {
+       if(w[1]=='/'){return 2;}
+       if(w[w.length()-2]=='/'){return 4;}
+       if(w[1]=='?'){return 6;}
+       if(w[1]=='!'){return 5;}
+       return 1;
+    }
+    return 3;
+}
