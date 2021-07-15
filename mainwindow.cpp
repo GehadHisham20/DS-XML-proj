@@ -398,7 +398,7 @@ void printNode(Node* root){
                 json += root->data + "\:[";
             }
             else if (root->child.size() > 0 && root->child[0]->data != "\*" && root->insideData.empty()) {
-                json += root->data + "\:";
+                json += root->data + "\:{";
             }
             else if (root->child.size() > 0 && root->child[0]->data != "\*" && !root->insideData.empty()) {
                 json += root->data + "\:" + root->insideData;
