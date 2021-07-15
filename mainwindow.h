@@ -45,6 +45,7 @@ private slots:
     void on_Exit_Button_clicked();
 
     void on_Correct_Button_clicked();
+    void on_Compress_Button_clicked();
 
 
 
