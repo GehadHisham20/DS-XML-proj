@@ -193,44 +193,50 @@ void Brackets(Node* root)
 void printNode (Node* root)
 {
     
-   if (root->data == "*")
-   {
-        json+=root->insideData;
-   }
-
-    
-    else if (root->child.size() == 0)
-    {
-        if (root->parent->insideData.empty()&&(root->data[root->data.length()-1] != '}' || root->data[root->data.length()-1] != ']'))
-        {
-            json+=root->data+",";
-        }
-        else if (root->parent->insideData.empty())
-        {
-            json+=root->data;
-        }
-    }
-
-  
-   else if (root->child.size() >1 && root->child[0]->data=="*")
-   {
-        json+=root->data+":[";
-    }
-
-
-    
-    else if (root->child.size()>=1)
-    {
-        if (root->insideData.empty()&&getParent(root)==root)
-        {
-            json+=root->data+":{";
-        }
-        else if (root->insideData.empty())
-        {
-            json+=root->data+":"+root->insideData;
-        }
-    }
-
+   if (root->data == "\*" && root->child.size() == 1 && root->child[0]->child.size() == 0 && root->insideData.empty()) {
+                return;
+            }if (root->data == "\*" && root->child.size() == 1 && root->child[0]->child.size() == 0 && !root->insideData.empty()) {
+                json += root->insideData;
+            }
+            else if (root->data == "\*" && root->child.size() >= 1 && root->insideData.empty()) {
+                json += "{";
+            }
+            else if (root->data == "\*" && root->child.size() >= 1 && !root->insideData.empty()) {
+                json += root->insideData;
+            }
+            else if (root->child.size() == 0 && (root->data[root->data.length() - 1] == '}' || root->data[root->data.length() - 1] == ']')) {
+                if (!root->parent->insideData.empty()) {
+                    json += "\"text\"\:" + root->data + ",";
+                }
+                else { json += root->data + ","; }
+            }
+            else if (root->child.size() == 0) {
+                if (root->parent->child.size() == 1 && root->parent->insideData.empty()) {
+                    json += root->data + ",";
+                }
+                else { json += root->data + "},"; }
+            }
+            else if (root->child.size() == 1 && root->child[0]->child.size() != 0 && root->data != "\*" && root->insideData.empty() && root->parent != NULL) {
+                json += root->data + "\:{";
+            }
+            else if (root->child.size() == 1 && root->child[0]->child.size() != 0 && root->data != "\*" && !root->insideData.empty() && root->parent != NULL) {
+                json += root->data + "\:" + root->insideData;
+            }
+            else if (root->child.size() == 1 && root->data != "\*" && root->parent != NULL && root->insideData.empty()) {
+                json += root->data + ":";
+            }
+            else if (root->child.size() == 1 && root->data != "\*" && root->parent != NULL && !root->insideData.empty()) {
+                json += root->data + "\:" + root->insideData;
+            }
+            else if (root->child.size() >0 && root->child[0]->data == "\*") {
+                json += root->data + "\:[";
+            }
+            else if (root->child.size() > 0 && root->child[0]->data != "\*" && root->insideData.empty()) {
+                json += root->data + "\:";
+            }
+            else if (root->child.size() > 0 && root->child[0]->data != "\*" && !root->insideData.empty()) {
+                json += root->data + "\:" + root->insideData;
+            }
 }
 
 
